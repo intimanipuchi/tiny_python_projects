@@ -66,3 +66,13 @@ def test_vowel_upper():
     for word in vowel_words:
         out = getoutput(f'{prg} {word.upper()}')
         assert out.strip() == template.format('an', word.upper())
+
+# --- Added by Roman -------------------------------
+# --------------------------------------------------
+def test_consonant_title():
+    """Octopus -> An Octopus"""
+
+    for word in consonant_words:
+        out = getoutput(f'{prg} {word.title()}')
+        assert out.strip() == template.format('A', word.title())
+
