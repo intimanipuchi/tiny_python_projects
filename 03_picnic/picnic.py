@@ -13,34 +13,47 @@ def get_args():
     """Get command-line arguments"""
 
     parser = argparse.ArgumentParser(
-        description='Working with lists',
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+        description="Working with lists",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
 
-    parser.add_argument('item',
+    parser.add_argument("items",
                         type=str,
-                        nargs='+',
-                        metavar='str',
-                        help='item(s) to bring')
+                        nargs="+",
+                        metavar="str",
+                        help="item(s) to bring")
 
-    parser.add_argument('-s',
-                        '--sort',
-                        help='a boolean flag',
-                        action='store_true')
+    parser.add_argument("-s",
+                        "--sorted",
+                        help="a boolean flag",
+                        action="store_true")
 
     return parser.parse_args()
 
 
 # --------------------------------------------------
 def main():
-    """Make a jazz noise here"""
+    """The main function: formatting and printing the output"""
 
     args = get_args()
-    flag_arg = args.sort
-    pos_arg = args.item
-
-    print("End of main")
+    sort_flag = args.sorted
+    items = args.items
+    if sort_flag:
+        items = sorted(items)
+    if len(items) == 1:
+        print(f"You are bringing {items[0]}.")
+    elif len(items) < 3:
+        items.insert(-1, "and")
+        print(f"You are bringing {' '.join(items)}.")
+    else:
+        # print(items)
+        last = items[-1]
+        and_last = "and " + last
+        items[-1] = and_last
+        # print(items)
+        print(f"You are bringing {', '.join(items)}.")
 
 
 # --------------------------------------------------
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
