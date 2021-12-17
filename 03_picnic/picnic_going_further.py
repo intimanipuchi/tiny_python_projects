@@ -25,8 +25,22 @@ def get_args():
 
     parser.add_argument("-s",
                         "--sorted",
-                        help="a boolean flag",
+                        help="sort the list",
                         action="store_true")
+
+    parser.add_argument("-c",
+                        "--comma",
+                        help="remove the Oxford comma",
+                        action="store_true")
+
+    parser.add_argument(
+        "-d",
+        "--delimiter",
+        help="choose delimiter",
+        type=str,
+        metavar="str",
+        default=",",
+    )
 
     return parser.parse_args()
 
@@ -38,6 +52,7 @@ def main():
     args = get_args()
     sort_flag = args.sorted
     items = args.items
+    delim = args.delimiter + " "
     if sort_flag:
         items = sorted(items)
     if len(items) == 1:
@@ -46,12 +61,19 @@ def main():
         items.insert(-1, "and")
         print(f"You are bringing {' '.join(items)}.")
     else:
+        if args.comma:
+            # print(args.comma)
+            end = items[-2] + " and " + items[-1]
+            items.pop()
+            items[-1] = end
+            # print("You are bringing {}.".format(" {delim".joint(items))
+        else:
+            # print(items)
+            last = items[-1]
+            and_last = "and " + last
+            items[-1] = and_last
         # print(items)
-        last = items[-1]
-        and_last = "and " + last
-        items[-1] = and_last
-        # print(items)
-        print(f"You are bringing {', '.join(items)}.")
+        print(f"You are bringing {delim.join(items)}.")
 
 
 # --------------------------------------------------
