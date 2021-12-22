@@ -35,18 +35,34 @@ def get_args():
 # --------------------------------------------------
 def main():
     """Make a jazz noise here"""
+
     args = get_args()
-    for letter in args.letter:
-        print(letter)
-    lookup = {}
-    for line in args.file:
-        print(line[0], end='')
-        lookup[line[0]] = line.rstrip()
-    print()
-    print(lookup['A'])
-    print(lookup['Z'])
-
-
+    letter = args.letter
+    # print(type(letter))
+    fh = args.file
+    #print(type(fh))
+    for i in letter:
+        #print(i)
+        if i.lower() not in [char for char in 'abcdefghijklmnopqrstuvwxyz']:
+            print(f'I do not know "{i}".')
+        else:
+            #print(i)
+            for line in fh:
+                #print(i)
+                if line[0].lower() == i.lower():
+                    print(line.rstrip())
+                    #print(line[0])
+                    #print(i)
+            fh.seek(0)
+    #for line in fh:
+        #print(line)
+        #for i in letter:
+            #print(i)
+            #if line[0].lower() == i.lower():
+                #print(line.rstrip())
+                #print(line[0])
+                #print(i)
+    
 # --------------------------------------------------
 if __name__ == '__main__':
     main()
