@@ -13,40 +13,47 @@ def get_args():
     """Get command-line arguments"""
 
     parser = argparse.ArgumentParser(
-        description='Rock the Casbah',
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+        description="Creating lookup dictionary",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
 
-    parser.add_argument('letter',
-                        metavar='str',
-                        nargs='+',
+    parser.add_argument("letter",
+                        metavar="letter",
+                        nargs="+",
                         type=str,
-                        help='A letter')
+                        help="Letter(s)")
 
-    parser.add_argument('-f',
-                        '--file',
-                        help='A readable file',
-                        metavar='FILE',
-                        type=argparse.FileType('rt'),
-                        default='gashlycrumb.txt')
+    parser.add_argument(
+        "-f",
+        "--file",
+        help="A readable file",
+        metavar="FILE",
+        type=argparse.FileType("rt"),
+        default="gashlycrumb.txt",
+    )
 
     return parser.parse_args()
 
 
 # --------------------------------------------------
 def main():
-    """Make a jazz noise here"""
+    """Main program"""
     args = get_args()
+
+    #    lookup = {}
+    #    for line in args.file:
+    #        lookup[line[0].upper()] = line.rstrip()
+    #    Or use dictionary comprehension instead of code above
+    lookup = {line[0].upper(): line.rstrip() for line in args.file}
+
     for letter in args.letter:
-        print(letter)
-    lookup = {}
-    for line in args.file:
-        print(line[0], end='')
-        lookup[line[0]] = line.rstrip()
-    print()
-    print(lookup['A'])
-    print(lookup['Z'])
+        #        if letter.upper() in lookup:
+        #            print(lookup[letter.upper()])
+        #        else:
+        #            print(f'I do not know "{letter}".')
+        print(lookup.get(letter.upper(), f'I do not know "{letter}".'))
 
 
 # --------------------------------------------------
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
