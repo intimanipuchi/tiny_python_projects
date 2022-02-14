@@ -38,12 +38,26 @@ def main():
 
 def verse(bottle):
     """Sing a verse"""
-
-    return '\n'.join([
-       '1 bottle of beer on the wall,', '1 bottle of beer,',
-       'Take one down, pass it around,',
-       'No more bottles of beer on the wall!'
-    ])
+    if bottle > 2:
+        return '\n'.join([
+        f'{bottle} bottles of beer on the wall,', 
+        f'{bottle} bottles of beer,',
+        'Take one down, pass it around,',
+        f'{bottle - 1} bottles of beer on the wall!'
+        ])
+    if bottle == 2:
+        return '\n'.join([
+        f'{bottle} bottles of beer on the wall,', 
+        f'{bottle} bottles of beer,',
+        'Take one down, pass it around,',
+        f'{bottle - 1} bottle of beer on the wall!'
+        ])
+    else:
+        return '\n'.join([
+        '1 bottle of beer on the wall,', '1 bottle of beer,',
+        'Take one down, pass it around,',
+        'No more bottles of beer on the wall!'
+        ])
 
 def test_verse():
     """Test verse"""
