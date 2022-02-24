@@ -34,7 +34,22 @@ def main():
     """Make a jazz noise here"""
 
     args = get_args()
-    print(args.num)
+    num = args.num
+
+    # Version 1
+    # for i in range(args.num, 0, -1):
+    #     print(verse(num))
+    #     num -=1
+
+    # Version 2
+    # song = [verse(i) for i in reversed(range(1, num + 1))]
+    # for j in song:
+    #     print(j)
+
+    # Version 3
+    song = map(verse, range(num, 0, -1))
+    for j in song:
+        print(j)
 
 def verse(bottle):
     """Sing a verse"""
@@ -43,14 +58,14 @@ def verse(bottle):
         f'{bottle} bottles of beer on the wall,', 
         f'{bottle} bottles of beer,',
         'Take one down, pass it around,',
-        f'{bottle - 1} bottles of beer on the wall!'
+        f'{bottle - 1} bottles of beer on the wall!\n'
         ])
     if bottle == 2:
         return '\n'.join([
         f'{bottle} bottles of beer on the wall,', 
         f'{bottle} bottles of beer,',
         'Take one down, pass it around,',
-        f'{bottle - 1} bottle of beer on the wall!'
+        f'{bottle - 1} bottle of beer on the wall!\n'
         ])
     else:
         return '\n'.join([
